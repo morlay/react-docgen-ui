@@ -1,0 +1,7 @@
+tests/
+src/
+public/
+tasks/
+
+__tests__/
+examples/

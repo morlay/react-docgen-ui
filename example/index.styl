@@ -1,0 +1,125 @@
+@require 'codemirror/lib/codemirror.css';
+@require 'codemirror/theme/solarized.css';
+@require 'normalize.css/normalize.css';
+
+$menu-width = 220px;
+$menu-color = #d8d8d8;
+$border-color = #d8d8d8;
+$menu-bg = #1b1c1d;
+
+.react-doc {
+  position: absolute;
+  top: 0;
+  right: 0;
+  bottom: 0;
+  left: 0;
+  overflow: hidden;
+}
+
+.react-doc-menu {
+
+  font-size: 12px;
+
+  position: absolute;
+  top: 0;
+  bottom: 0;
+  left: 0;
+  width: $menu-width;
+  overflow-x: hidden;
+  overflow-y: auto;
+
+  padding: 10px;
+  box-sizing: border-box;
+
+  color: $menu-color;
+  background-color: $menu-bg;
+
+  a {
+    color: $menu-color;
+    text-decoration: none;
+  }
+
+  .react-doc-menu__group-heading {
+    font-size: 1.2em;
+  }
+
+  .react-doc-menu__group-list {
+    font-size: 1.1em;
+    list-style: none;
+    padding: 0;
+  }
+
+  .react-doc-menu__group-list-item {
+    padding: 0;
+    margin-bottom: 0.25em;
+  }
+}
+
+.react-doc-main {
+  position: absolute;
+  top: 0;
+  bottom: 0;
+  left: $menu-width;
+  right: 0;
+  overflow-x: hidden;
+  overflow-y: auto;
+}
+
+.react-doc-section__title,
+.react-doc-section__desc,
+.react-doc-section__prop {
+  padding: 0 1rem;
+}
+
+.react-doc-section__sub-title {
+  margin-left: 0.5em;
+  color: $border-color;
+}
+
+.react-playground {
+  border-top: 1px solid $border-color;
+  border-bottom: 1px solid $border-color;
+
+  .code-mirror-editor {
+    border-top: 1px solid $border-color;
+    .CodeMirror {
+      height: auto;
+      box-shadow: none;
+    }
+  }
+
+  .react-playground__code-toggle {
+    position: absolute;
+    border: 1px solid $border-color;
+    border-right: 0;
+    border-top: 0;
+    right: 0;
+    padding: 8px 12px;
+    background-color: #fff;
+    border-bottom-left-radius: 4px;
+    display: inline-block;
+    font-size: 11px;
+    color: #333;
+    text-decoration: none;
+    z-index: 20;
+  }
+}
+
+.react-playground__example {
+  position: relative;
+  &:after {
+    position: absolute;
+    top: 16px;
+    left: 16px;
+    font-size: 11px;
+    font-weight: 700;
+    color: #959595;
+    letter-spacing: 1px;
+    content: "Example";
+  }
+}
+
+.react-playground__example-inner {
+  padding: 42px 36px 20px;
+  background-color: #fff;
+}
