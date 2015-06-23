@@ -9,13 +9,7 @@ const defaultConfig = {
     "!src/{,**/}__tests__/*.js{,x}",
     "!src/{,**/}examples/*.js{,x}"
   ],
-  dest: "dist/",
-  options: {
-    "stage": 0,
-    "optional": [
-      "runtime"
-    ]
-  }
+  dest: "dist/"
 };
 
 const TASK_NAME = "npm-build";

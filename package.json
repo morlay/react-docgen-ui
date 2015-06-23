@@ -18,7 +18,7 @@
   },
   "homepage": "https://github.com/morlay/react-docgen-ui",
   "devDependencies": {
-    "autoprefixer-stylus": "^0.6.0",
+    "autoprefixer-stylus": "^0.7.0",
     "babel-eslint": "^3.1.17",
     "babelify": "^6.1.2",
     "browser-sync": "^2.6.9",

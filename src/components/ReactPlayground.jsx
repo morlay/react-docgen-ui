@@ -2,7 +2,7 @@ import React from "react";
 import classNames from "classnames";
 import * as babel from "babel";
 
-import CodeMirrorEditor from "./CodeMirrorEditor.jsx";
+import CodeMirrorEditor from "./CodeMirrorEditor";
 
 const PropTypes = React.PropTypes;
 

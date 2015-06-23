@@ -1,7 +1,7 @@
 import _ from "lodash";
 import gulp from "gulp";
 import gutil from "gulp-util";
-import gulpDocGenUi from "../src/index";
+import gulpDocGenUi from "../src";
 
 import watcher from "./libs/watcher"
 

@@ -4,8 +4,7 @@ import gulp from "gulp";
 import fs from "fs";
 import mapStream from "map-stream";
 
-import gulpReactDocGenUI from "../index.js"
-
+import gulpReactDocGenUI from "../index"
 
 function assertResult(cb) {
   return mapStream((file, callback)=> {
