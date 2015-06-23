@@ -4,7 +4,7 @@
   "main": "dist/index.js",
   "scripts": {
     "mocha": "mocha -R dot --compilers .:babel/register tests/helpers/jsdom.js src/__tests__/*.spec.js* src/**/__tests__/*.spec.js*",
-    "build": "babel src --out-dir dist",
+    "build": "gulp npm-build",
     "test": "npm run mocha && gulp lint"
   },
   "author": "Morlay",
