@@ -2,7 +2,7 @@ import _ from "lodash";
 import path from "path";
 import gUtil from "gulp-util";
 import through from "through2";
-import reactDocGen from "react-docgen";
+import * as reactDocGen from "react-docgen";
 
 import getModulePathByVinylFile from "./libs/getModulePathByVinylFile";
 import getModuleInfoByVinylFile from "./libs/getModuleInfoByVinylFile";
