@@ -74,9 +74,14 @@ const CodeMirrorEditor = React.createClass({
     let editor;
 
     if (this._isMobile()) {
-      editor = <pre style={{overflow: 'scroll'}}>{this.props.codeText}</pre>;
+      editor = (
+        <pre style={{overflow: 'scroll'}}>
+          {this.props.codeText}
+        </pre>
+      );
     } else {
-      editor = <textarea ref='editor' defaultValue={this.props.codeText}/>;
+      editor = (<textarea ref='editor'
+                          defaultValue={this.props.codeText}/>);
     }
 
     return (

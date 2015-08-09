@@ -38,7 +38,6 @@ const ReactPlayground = React.createClass({
     clearTimeout(this.timeoutID);
   },
 
-
   componentWillUnmount() {
     try {
       const mountNode = React.findDOMNode(this.refs.preview);
@@ -97,14 +96,15 @@ const ReactPlayground = React.createClass({
       <div {...this.props}
         className='react-playground'>
         <div className='react-playground__example'>
-          <div className='react-playground__example-inner' ref='preview'/>
+          <div className='react-playground__example-inner'
+               ref='preview'/>
         </div>
-        { this.state.showCode ? (
+        {this.state.showCode ? (
           <CodeMirrorEditor
             key='jsx'
             onChange={this.handleCodeChange}
             codeText={this.state.codeText}/>
-        ) : null }
+        ) : null}
         <a href='#'
            onClick={this._onCodeToggle}
            className={classNames('react-playground__code-toggle', {

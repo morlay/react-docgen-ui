@@ -5,7 +5,7 @@
   "scripts": {
     "pre-publish": "gulp pre-publish",
     "deploy-example": "NODE_ENV=production gulp build && gulp deploy-gh-pages",
-    "test": "gulp mocha && gulp lint"
+    "test": "gulp lint && gulp mocha --cover"
   },
   "author": "Morlay",
   "license": "WTFPL",
