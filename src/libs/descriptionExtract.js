@@ -1,5 +1,5 @@
-import _ from "lodash";
-import doctrine from "doctrine";
+import _ from 'lodash';
+import doctrine from 'doctrine';
 
 function descriptionExtract(descriptionString) {
   if (_.isUndefined(descriptionString)) {
@@ -9,8 +9,8 @@ function descriptionExtract(descriptionString) {
     unwrap: true,
     sloppy: true,
     tags: [
-      "example",
-      "exampleFile"
+      'example',
+      'exampleFile'
     ]
   });
 }

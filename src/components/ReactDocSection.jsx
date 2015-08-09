@@ -1,7 +1,7 @@
-import React from "react";
-import _ from "lodash";
-import DocHelpers from "../mixins/DocHelpers";
-import ReactPlayground from "./ReactPlayground";
+import React from 'react';
+import _ from 'lodash';
+import DocHelpers from '../mixins/DocHelpers';
+import ReactPlayground from './ReactPlayground';
 
 const PropTypes = React.PropTypes;
 
@@ -9,7 +9,8 @@ const ReactDocSection = React.createClass({
 
   propTypes: {
     componentItem: PropTypes.object.isRequired,
-    reactDocGlobalRequire: PropTypes.func
+    reactDocGlobalRequire: PropTypes.func,
+    grouper: PropTypes.func
   },
 
   mixins: [
@@ -23,16 +24,16 @@ const ReactDocSection = React.createClass({
       .map((propKey, idx)=> {
         const propItem = componentProps[propKey];
         return (
-          <div className="react-doc-section__prop" key={idx}>
-            <h3 className="react-doc-section__prop-title"> Prop: {propKey}
+          <div className='react-doc-section__prop' key={idx}>
+            <h3 className='react-doc-section__prop-title'> Prop: {propKey}
               {propItem.required ? <span> *</span> : null}
             </h3>
-            <small className="react-doc-section__prop-sub-title">
+            <small className='react-doc-section__prop-sub-title'>
               {this.processType(propItem.type)}
             </small>
-            <div className="react-doc-section__prop-desc"
+            <div className='react-doc-section__prop-desc'
                  dangerouslySetInnerHTML={{
-                   __html: propItem.description ? propItem.description : ""
+                   __html: propItem.description ? propItem.description : ''
                  }}/>
             {this.renderExamples(propItem.examples)}
           </div>
@@ -46,7 +47,7 @@ const ReactDocSection = React.createClass({
     if (_.isObject(typeObject)) {
       switch (typeObject.name) {
 
-        case "shape":
+        case 'shape':
 
           return (
             <div>
@@ -68,16 +69,16 @@ const ReactDocSection = React.createClass({
             </div>
           );
 
-        case "enum":
-        case "union":
+        case 'enum':
+        case 'union':
 
           return _(typeObject.value)
             .map((obj)=> {
               return this.processType(obj);
             })
-            .join(" | ");
+            .join(' | ');
 
-        case "instanceOf":
+        case 'instanceOf':
 
           return `Type: ${typeObject.name} ${typeObject.value}`;
 
@@ -104,13 +105,13 @@ const ReactDocSection = React.createClass({
 
     return (
       <section {...props}
-        className="react-doc-section">
-        <h2 className="react-doc-section__title">{props.componentItem.name}
-          <small className="react-doc-section__sub-title">
+        className='react-doc-section'>
+        <h2 className='react-doc-section__title'>{props.componentItem.name}
+          <small className='react-doc-section__sub-title'>
             {props.grouper(props.componentItem.module)}
           </small>
         </h2>
-        <div className="react-doc-section__desc"
+        <div className='react-doc-section__desc'
              dangerouslySetInnerHTML={{
                __html: props.componentItem.description
              }}/>

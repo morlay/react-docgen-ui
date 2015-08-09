@@ -1,22 +1,22 @@
-import { expect } from "chai";
-import { File } from "gulp-util"
+import { expect } from 'chai';
+import { File } from 'gulp-util'
 
-import getModuleInfoByVinylFile from "../getModuleInfoByVinylFile"
+import getModuleInfoByVinylFile from '../getModuleInfoByVinylFile'
 
 describe(__filename, function () {
 
-  context("getModuleInfoByVinylFile", ()=> {
+  context('getModuleInfoByVinylFile', ()=> {
 
-    it("should get module name by vinylFile object", function () {
+    it('should get module name by vinylFile object', function () {
 
-      const pathName = "path/to/file.jsx";
+      const pathName = 'path/to/file.jsx';
       const vinylFile = new File({
         path: pathName
       });
 
       expect(getModuleInfoByVinylFile(vinylFile)).to.be.deep.equal({
-        "name": "file",
-        "module": "path/to"
+        'name': 'file',
+        'module': 'path/to'
       });
     });
 

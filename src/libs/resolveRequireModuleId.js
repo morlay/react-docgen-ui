@@ -1,16 +1,16 @@
-import _ from "lodash";
-import path from "path";
-import EXTENSIONS from "../constants/extensions";
+import _ from 'lodash';
+import path from 'path';
+import EXTENSIONS from '../constants/extensions';
 
 function resolveExamplePathName(originRequireString, options = {}) {
 
   const extensions = options.extensions ? [].concat(options.extensions) : EXTENSIONS;
   const basedir = options.basedir || process.cwd();
-  const pathName = originRequireString.match(/["'](\S+)["']/)[1];
+  const pathName = originRequireString.match(/['"](\S+)['"]/)[1];
 
   let resolvedPathName;
 
-  if (_.startsWith(pathName, "./") || _.startsWith(pathName, "../")) {
+  if (_.startsWith(pathName, './') || _.startsWith(pathName, '../')) {
     resolvedPathName = path.resolve(basedir, pathName);
     if (options.cwd) {
       resolvedPathName = path.relative(options.cwd, resolvedPathName)

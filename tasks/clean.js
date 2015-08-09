@@ -1,29 +1,15 @@
-import gulp from "gulp";
-import _ from "lodash";
-import path from "path";
-import del from "del"
+import gulp from 'gulp';
+import del from 'del'
 
-const defaultConfig = {
-  src: [
-    "dist",
-    "public"
-  ]
-};
+const TASK_NAME = 'clean';
 
-let conf;
-
-setOptions(); // init
-
-const TASK_NAME = "clean";
-
-const task =  gulp.task(TASK_NAME, (cb)=> {
-  del(conf.src, cb);
-});
-
-task.setOptions = setOptions;
-
-export default task;
-
-function setOptions(opts) {
-  conf = _.merge({}, defaultConfig, opts)
+function clean(callBack) {
+  gulp.autoRegister(TASK_NAME, (config)=> {
+    del(config.src, callBack)
+  });
 }
+
+gulp.task(TASK_NAME, clean);
+
+export default clean;
+

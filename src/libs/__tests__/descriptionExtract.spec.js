@@ -1,13 +1,13 @@
-import { expect } from "chai";
-import descriptionExtract from "../descriptionExtract"
+import { expect } from 'chai';
+import descriptionExtract from '../descriptionExtract'
 
 describe(__filename, function () {
 
-  context("descriptionExtract", ()=> {
+  context('descriptionExtract', ()=> {
 
-    it("should get tags from description string", function () {
+    it('should get tags from description string', function () {
 
-      var descriptionString = `
+      let descriptionString = `
          description.
          @exampleFile ./test.js
          @example
@@ -15,13 +15,13 @@ describe(__filename, function () {
       `;
 
       expect(descriptionExtract(descriptionString)).to.be.deep.equal({
-        description: "description.",
+        description: 'description.',
         tags: [{
-          "title": "exampleFile",
-          "description": "./test.js"
+          'title': 'exampleFile',
+          'description': './test.js'
         }, {
-          "title": "example",
-          "description": "console.log(1);"
+          'title': 'example',
+          'description': 'console.log(1);'
         }]
       });
     });

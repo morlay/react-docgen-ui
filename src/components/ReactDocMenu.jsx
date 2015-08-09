@@ -1,6 +1,6 @@
-import React from "react"
-import _ from "lodash"
-import DocHelpers from "../mixins/DocHelpers";
+import React from 'react'
+import _ from 'lodash'
+import DocHelpers from '../mixins/DocHelpers';
 
 const PropTypes = React.PropTypes;
 
@@ -11,7 +11,8 @@ const ReactDocMenu = React.createClass({
     /**
      * `groupName`, `componentName`
      */
-    onItemClick: PropTypes.func
+    onItemClick: PropTypes.func,
+    grouper: PropTypes.func
   },
 
   mixins: [
@@ -44,8 +45,8 @@ const ReactDocMenu = React.createClass({
   renderMenuItem(componentList){
     return _.map(componentList, (componentItem, idx)=> {
       return (
-        <li className="react-doc-menu__group-list-item" key={idx}>
-          <a href="#"
+        <li className='react-doc-menu__group-list-item' key={idx}>
+          <a href='#'
              onClick={this._onItemClick.bind(this, this.props.grouper(componentItem.module), componentItem.name)}>
             {componentItem.name}
           </a>
@@ -56,9 +57,9 @@ const ReactDocMenu = React.createClass({
 
   renderWrapper(children){
     return (
-      <div className="react-doc-menu">
-        <h1 className="react-doc-menu__group-heading">
-          <a href="#" onClick={this._onItemClick.bind(this, null, null)}>
+      <div className='react-doc-menu'>
+        <h1 className='react-doc-menu__group-heading'>
+          <a href='#' onClick={this._onItemClick.bind(this, null, null)}>
             All
           </a>
         </h1>
@@ -76,13 +77,13 @@ const ReactDocMenu = React.createClass({
           return (
             <div
               key={idx}
-              className="react-doc-menu__group">
-              <h1 className="react-doc-menu__group-heading">
-                <a href="#" onClick={this._onItemClick.bind(this, groupName, null)}>
+              className='react-doc-menu__group'>
+              <h1 className='react-doc-menu__group-heading'>
+                <a href='#' onClick={this._onItemClick.bind(this, groupName, null)}>
                   {groupName}
                 </a>
               </h1>
-              <ul className="react-doc-menu__group-list">
+              <ul className='react-doc-menu__group-list'>
                 {
                   this.renderMenuItem(
                     _(this.props.reactDocJson)

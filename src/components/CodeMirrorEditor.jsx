@@ -1,11 +1,11 @@
-import React from "react";
-import CodeMirror from "codemirror";
+import React from 'react';
+import CodeMirror from 'codemirror';
 
 const PropTypes = React.PropTypes;
 
-require("codemirror/mode/javascript/javascript");
+require('codemirror/mode/javascript/javascript');
 
-const IS_MOBILE = typeof global.navigator !== "undefined" && (
+const IS_MOBILE = typeof global.navigator !== 'undefined' && (
     global.navigator.userAgent.match(/Android/i)
     || global.navigator.userAgent.match(/webOS/i)
     || global.navigator.userAgent.match(/iPhone/i)
@@ -43,16 +43,16 @@ const CodeMirrorEditor = React.createClass({
   _initialEditor(){
 
     this._editor = CodeMirror.fromTextArea(React.findDOMNode(this.refs.editor), {
-      mode: "javascript",
+      mode: 'javascript',
       lineNumbers: true,
       lineWrapping: true,
       matchBrackets: true,
       tabSize: 2,
-      theme: "solarized",
+      theme: 'solarized',
       readOnly: this.props.readOnly
     });
 
-    this._editor.on("change", this._handleChange);
+    this._editor.on('change', this._handleChange);
 
   },
 
@@ -74,15 +74,15 @@ const CodeMirrorEditor = React.createClass({
     let editor;
 
     if (this._isMobile()) {
-      editor = <pre style={{overflow: "scroll"}}>{this.props.codeText}</pre>;
+      editor = <pre style={{overflow: 'scroll'}}>{this.props.codeText}</pre>;
     } else {
-      editor = <textarea ref="editor" defaultValue={this.props.codeText}/>;
+      editor = <textarea ref='editor' defaultValue={this.props.codeText}/>;
     }
 
     return (
       <div
         {...this.props}
-        className="code-mirror-editor">
+        className='code-mirror-editor'>
         {editor}
       </div>
     );

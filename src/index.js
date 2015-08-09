@@ -1,16 +1,16 @@
-import _ from "lodash";
-import path from "path";
-import gUtil from "gulp-util";
-import through from "through2";
-import * as reactDocGen from "react-docgen";
+import _ from 'lodash';
+import path from 'path';
+import gUtil from 'gulp-util';
+import through from 'through2';
+import * as reactDocGen from 'react-docgen';
 
-import getModulePathByVinylFile from "./libs/getModulePathByVinylFile";
-import getModuleInfoByVinylFile from "./libs/getModuleInfoByVinylFile";
-import descriptionProcess from "./libs/descriptionProcess";
-import getDocDependenceListByResult from "./libs/getDocDependenceListByResult";
-import generateDocDependenceListByRequireList from "./libs/generateDocDependenceListByRequireList";
+import getModulePathByVinylFile from './libs/getModulePathByVinylFile';
+import getModuleInfoByVinylFile from './libs/getModuleInfoByVinylFile';
+import descriptionProcess from './libs/descriptionProcess';
+import getDocDependenceListByResult from './libs/getDocDependenceListByResult';
+import generateDocDependenceListByRequireList from './libs/generateDocDependenceListByRequireList';
 
-const PLUGIN_NAME = "react-doc";
+const PLUGIN_NAME = 'react-doc';
 
 function gulpPlugin(options = {}) {
 
@@ -35,7 +35,7 @@ function gulpPlugin(options = {}) {
       }
 
     } catch (err) {
-      this.emit("error", new gUtil.PluginError(PLUGIN_NAME, err));
+      this.emit('error', new gUtil.PluginError(PLUGIN_NAME, err));
     }
 
     return cb();
@@ -44,15 +44,15 @@ function gulpPlugin(options = {}) {
 
   function endStream(cb) {
 
-    var filename = options.filename || PLUGIN_NAME;
+    const filename = options.filename || PLUGIN_NAME;
 
-    var jsonFile = new gUtil.File({
-      path: filename + ".json",
+    const jsonFile = new gUtil.File({
+      path: filename + '.json',
       contents: new Buffer(JSON.stringify(result, null, 2))
     });
 
-    var requireListFile = new gUtil.File({
-      path: filename + ".js",
+    const requireListFile = new gUtil.File({
+      path: filename + '.js',
       contents: new Buffer(
         generateDocDependenceListByRequireList(
           getDocDependenceListByResult(result)

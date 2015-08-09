@@ -1,37 +1,37 @@
-import { expect } from "chai";
+import { expect } from 'chai';
 
-import getDocDependenceListByResult from "../getDocDependenceListByResult"
+import getDocDependenceListByResult from '../getDocDependenceListByResult'
 
 describe(__filename, function () {
 
-  context("getDocDependenceListByResult", ()=> {
+  context('getDocDependenceListByResult', ()=> {
 
-    it("should get module name by vinylFile object", function () {
+    it('should get module name by vinylFile object', function () {
 
-      var result = {
-        "components/elements/Button.jsx": {
-          "examples": [
+      let result = {
+        'components/elements/Button.jsx': {
+          'examples': [
             {
-              "requireList": [
+              'requireList': [
                 {
-                  "path": "react"
+                  'path': 'react'
                 },
                 {
-                  "path": "components/Component"
+                  'path': 'components/Component'
                 }
               ]
             }
           ],
-          "props": {
-            "color": {
-              "examples": [
+          'props': {
+            'color': {
+              'examples': [
                 {
-                  "requireList": [
+                  'requireList': [
                     {
-                      "path": "react"
+                      'path': 'react'
                     },
                     {
-                      "path": "components/Component2"
+                      'path': 'components/Component2'
                     }
                   ]
                 }
@@ -42,9 +42,9 @@ describe(__filename, function () {
       };
 
       expect(getDocDependenceListByResult(result)).to.be.deep.equal([
-        "react",
-        "components/Component",
-        "components/Component2"
+        'react',
+        'components/Component',
+        'components/Component2'
       ]);
     });
 

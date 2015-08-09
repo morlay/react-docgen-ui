@@ -45,7 +45,6 @@ const ReactDoc = React.createClass({
       </div>
     );
   }
-
 });
 
 const rootRoutes = (

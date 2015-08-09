@@ -1,8 +1,8 @@
-import _ from "lodash";
-import fs from "fs";
-import path from "path";
+import _ from 'lodash';
+import fs from 'fs';
+import path from 'path';
 
-import resolveRequireModuleId from "./resolveRequireModuleId";
+import resolveRequireModuleId from './resolveRequireModuleId';
 
 function getExampleContents(tagItem = {}, options = {}) {
 
@@ -13,10 +13,10 @@ function getExampleContents(tagItem = {}, options = {}) {
   let contents;
   let exampleFile = null;
 
-  if (tagItem.title === "exampleFile") {
+  if (tagItem.title === 'exampleFile') {
     exampleFile = path.resolve(basedir, _.trim(tagItem.description));
     options.basedir = path.dirname(exampleFile);
-    contents = String(fs.readFileSync(exampleFile, "utf-8"));
+    contents = String(fs.readFileSync(exampleFile, 'utf-8'));
 
   } else {
     contents = tagItem.description
@@ -24,7 +24,7 @@ function getExampleContents(tagItem = {}, options = {}) {
 
   let imports = [];
 
-  const es6Way = contents.match(/import[^"']+(\S+)/gm);
+  const es6Way = contents.match(/import[^'"]+(\S+)/gm);
   const cjsWay = contents.match(/require\((\S+)\)/gm);
 
   if (es6Way) {
@@ -39,7 +39,7 @@ function getExampleContents(tagItem = {}, options = {}) {
     return {
       path: resolvedPathName,
       src: item,
-      dest: item.replace(/["'](\S+)["']/gm, JSON.stringify(resolvedPathName))
+      dest: item.replace(/['"](\S+)['"]/gm, `'${resolvedPathName}'`)
     }
   });
 

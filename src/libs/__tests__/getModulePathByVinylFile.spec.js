@@ -1,16 +1,16 @@
-import { expect } from "chai";
-import { File } from "gulp-util"
-import path from "path";
+import { expect } from 'chai';
+import { File } from 'gulp-util'
+import path from 'path';
 
-import getModulePathByVinylFile from "../getModulePathByVinylFile"
+import getModulePathByVinylFile from '../getModulePathByVinylFile'
 
 describe(__filename, function () {
 
-  context("getModulePathByVinylFile", ()=> {
+  context('getModulePathByVinylFile', ()=> {
 
-    it("should get module name by vinylFile object", function () {
+    it('should get module name by vinylFile object', function () {
 
-      const pathName = "path/to/file.jsx";
+      const pathName = 'path/to/file.jsx';
       const vinylFile = new File({
         path: pathName
       });
@@ -19,10 +19,10 @@ describe(__filename, function () {
 
     });
 
-    it("should get module name by vinylFile object when set some cwd", function () {
+    it('should get module name by vinylFile object when set some cwd', function () {
 
-      const cwd = "path/to";
-      const pathName = "path/to/file.jsx";
+      const cwd = 'path/to';
+      const pathName = 'path/to/file.jsx';
       const vinylFile = new File({
         cwd: cwd,
         path: pathName

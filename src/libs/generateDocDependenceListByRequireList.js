@@ -1,17 +1,12 @@
-import _ from "lodash";
+import _ from 'lodash';
 
 function generateDocDependenceListByRequireList(dependenceList = []) {
   return _(dependenceList)
     .map((item)=> {
-      return [
-        "require('",
-        item,
-        "'",
-        ");"
-      ].join("");
+      return `require('${item}');`
     })
-    .push("module.exports = require;")
-    .join("\n");
+    .push('module.exports = require;')
+    .join('\n');
 }
 
 export default generateDocDependenceListByRequireList;

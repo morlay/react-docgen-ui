@@ -1,6 +1,6 @@
 export default [
-  ".js",
-  ".jsx",
-  ".es",
-  ".es6"
+  '.js',
+  '.jsx',
+  '.es',
+  '.es6'
 ]

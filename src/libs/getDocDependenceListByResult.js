@@ -1,8 +1,8 @@
-import _ from "lodash";
+import _ from 'lodash';
 
 function getDocDependenceListByResult(result) {
 
-  var requireList = {};
+  let requireList = {};
 
   findExample(result);
 
@@ -10,7 +10,7 @@ function getDocDependenceListByResult(result) {
     _.forEach(_.keys(obj), (key)=> {
       if (_.isPlainObject(obj[key])) {
         findExample(obj[key])
-      } else if (key === "examples") {
+      } else if (key === 'examples') {
         _.forEach(obj[key], (exampleItem)=> {
           _.forEach(exampleItem.requireList, (requireItem)=> {
             requireList[requireItem.path] = true;

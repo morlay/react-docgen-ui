@@ -1,47 +1,47 @@
-import { expect } from "chai";
-import marked from "marked";
+import { expect } from 'chai';
+import marked from 'marked';
 
-import descriptionProcess from "../descriptionProcess"
+import descriptionProcess from '../descriptionProcess'
 
 describe(__filename, function () {
 
-  context("descriptionProcess", ()=> {
+  context('descriptionProcess', ()=> {
 
-    it("should process description", function () {
+    it('should process description', function () {
 
-      var targetObj = {
-        "description": [
-          "description.",
-          "@example console.log(1);"
-        ].join("\n")
+      let targetObj = {
+        'description': [
+          'description.',
+          '@example console.log(1);'
+        ].join('\n')
       };
 
       expect(descriptionProcess(targetObj, {
         basedir: __dirname
       }))
         .to.to.deep.equal({
-          description: marked("description."),
+          description: marked('description.'),
           examples: [{
             requireList: [],
-            contents: "console.log(1);"
+            contents: 'console.log(1);'
           }]
         });
 
     });
 
-    it("should process description in props", function () {
+    it('should process description in props', function () {
 
-      var targetObj = {
-        "description": [
-          "description.",
-          "@example console.log(1);"
-        ].join("\n"),
-        "props": {
-          "color": {
-            "description": [
-              "description.",
-              "@example console.log(1);"
-            ].join("\n")
+      let targetObj = {
+        'description': [
+          'description.',
+          '@example console.log(1);'
+        ].join('\n'),
+        'props': {
+          'color': {
+            'description': [
+              'description.',
+              '@example console.log(1);'
+            ].join('\n')
           }
         }
       };
@@ -50,17 +50,17 @@ describe(__filename, function () {
         basedir: __dirname
       }))
         .to.to.deep.equal({
-          description: marked("description."),
+          description: marked('description.'),
           examples: [{
             requireList: [],
-            contents: "console.log(1);"
+            contents: 'console.log(1);'
           }],
           props: {
-            "color": {
-              description: marked("description."),
+            'color': {
+              description: marked('description.'),
               examples: [{
                 requireList: [],
-                contents: "console.log(1);"
+                contents: 'console.log(1);'
               }]
             }
           }

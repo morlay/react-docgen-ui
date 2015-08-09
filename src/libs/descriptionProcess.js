@@ -1,8 +1,8 @@
-import _ from "lodash";
-import marked from "marked";
+import _ from 'lodash';
+import marked from 'marked';
 
-import descriptionExtract from "./descriptionExtract";
-import getExampleContents from "./getExampleContents";
+import descriptionExtract from './descriptionExtract';
+import getExampleContents from './getExampleContents';
 
 function descriptionProcess(targetObj = {}, options = {}) {
 

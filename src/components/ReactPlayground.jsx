@@ -1,8 +1,8 @@
-import React from "react";
-import classNames from "classnames";
-import * as babel from "babel";
+import React from 'react';
+import classNames from 'classnames';
+import * as babel from 'babel';
 
-import CodeMirrorEditor from "./CodeMirrorEditor";
+import CodeMirrorEditor from './CodeMirrorEditor';
 
 const PropTypes = React.PropTypes;
 
@@ -38,10 +38,6 @@ const ReactPlayground = React.createClass({
     clearTimeout(this.timeoutID);
   },
 
-  setTimeout() {
-    clearTimeout(this.timeoutID);
-    this.timeoutID = setTimeout.apply(null, arguments);
-  },
 
   componentWillUnmount() {
     try {
@@ -50,6 +46,11 @@ const ReactPlayground = React.createClass({
     } catch (e) {
       console.log(e)
     }
+  },
+
+  setTimeout() {
+    clearTimeout(this.timeoutID);
+    this.timeoutID = setTimeout.apply(null, arguments);
   },
 
   executeCode: function () {
@@ -64,7 +65,7 @@ const ReactPlayground = React.createClass({
       let Inst;
 
       eval(
-        "Inst = function(require){\n" + compiledCode + "\n};"
+        'Inst = function(require){\n' + compiledCode + '\n};'
       );
 
       Inst.call(null, this.props.reactDocGlobalRequire);
@@ -94,23 +95,23 @@ const ReactPlayground = React.createClass({
   render() {
     return (
       <div {...this.props}
-        className="react-playground">
-        <div className="react-playground__example">
-          <div className="react-playground__example-inner" ref="preview"/>
+        className='react-playground'>
+        <div className='react-playground__example'>
+          <div className='react-playground__example-inner' ref='preview'/>
         </div>
         { this.state.showCode ? (
           <CodeMirrorEditor
-            key="jsx"
+            key='jsx'
             onChange={this.handleCodeChange}
             codeText={this.state.codeText}/>
         ) : null }
-        <a href="#"
+        <a href='#'
            onClick={this._onCodeToggle}
-           className={classNames("react-playground__code-toggle", {
-            "react-playground__code-toggle--open": this.state.showCode
+           className={classNames('react-playground__code-toggle', {
+            'react-playground__code-toggle--open': this.state.showCode
           })}
           >
-          {this.state.showCode ? "hide code" : "show code"}
+          {this.state.showCode ? 'hide code' : 'show code'}
         </a>
       </div>
     );

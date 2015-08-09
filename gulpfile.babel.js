@@ -1,44 +1,31 @@
-import gulp from "gulp";
-import gutil from "gulp-util";
+import gulp from 'gulp'
+import runSequence from 'run-sequence'
+import requireDir from 'require-dir'
+import _ from 'lodash'
+import gulpTaskConfig from './tasks/libs/gulp-task-config'
 
-import clean from "./tasks/clean";
-import copy from "./tasks/copy";
-import docs from "./tasks/docs";
-import stylus from "./tasks/stylus";
-import lint from "./tasks/lint";
-import server from "./tasks/server";
-import browserify from "./tasks/browserify";
-import ghPages from "./tasks/gh-pages";
-import npmBuild from "./tasks/npm-build";
+gulpTaskConfig(gulp)
 
-import watcher from "./tasks/libs/watcher";
+requireDir('./tasks')
 
-import build from "./tasks/build";
+gulp.config('tasks', requireDir('./tasks/config'))
 
-build.setOptions({
-  taskQueue: [
-    "clean",
-    "copy",
-    "stylus",
-    "docs",
-    "lint",
-    "browserify"
-  ]
-});
+gulp.task('build', (callback)=> {
+  runSequence(
+    'clean',
+    'copy',
+    'docs',
+    'browserify',
+    'stylus',
+    callback
+  )
+})
 
-if (gutil.env.prod) {
-  process.env.NODE_ENV = "production";
-}
+gulp.task('dev', ()=> {
+  gulp.config(gulp.DEV_MODE, true)
+  gulp.start(['build', 'server'])
+})
 
-if (gutil.env.watch) {
-  watcher.setWatcher();
-}
-
-gulp.task("dev", ()=> {
-  watcher.setWatcher();
-  gulp.start(["build", "server"]);
-});
-
-gulp.task("npm", ()=> {
-  gulp.start(["clean", "npm-build"])
-});
+gulp.task('pre-publish', ()=> {
+  gulp.start(['clean', 'babel'])
+})

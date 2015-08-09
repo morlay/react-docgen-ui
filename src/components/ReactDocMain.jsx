@@ -1,8 +1,8 @@
-import React from "react";
-import _ from "lodash";
-import DocHelpers from "../mixins/DocHelpers";
+import React from 'react';
+import _ from 'lodash';
+import DocHelpers from '../mixins/DocHelpers';
 
-import ReactDocSection from "./ReactDocSection";
+import ReactDocSection from './ReactDocSection';
 
 const PropTypes = React.PropTypes;
 
@@ -12,27 +12,20 @@ const ReactDocMain = React.createClass({
     reactDocGlobalRequire: PropTypes.func.isRequired,
     reactDocJson: PropTypes.object.isRequired,
     params: PropTypes.object.isRequired,
-    query: PropTypes.object.isRequired
+    query: PropTypes.object.isRequired,
+    grouper: PropTypes.func
   },
 
   mixins: [
     DocHelpers
   ],
 
-  render() {
-    return (
-      <div className="react-doc-main">
-        {this.renderDocMain()}
-      </div>
-    );
-  },
-
   renderDocMain() {
 
     const props = this.props;
 
     return (
-      <main elem="doc-main">
+      <main elem='doc-main'>
         {_(props.reactDocJson)
           .values()
           .filter((componentItem)=> {
@@ -46,17 +39,28 @@ const ReactDocMain = React.createClass({
             return true;
           })
           .map((componentItem, idx)=> {
-            return <ReactDocSection
-              key={idx}
-              componentItem={componentItem}
-              reactDocGlobalRequire={props.reactDocGlobalRequire}
-              />
+            return (
+              <ReactDocSection
+                key={idx}
+                componentItem={componentItem}
+                reactDocGlobalRequire={props.reactDocGlobalRequire}
+                />
+            )
           })
           .value()
         }
       </main>
     )
+  },
+
+  render() {
+    return (
+      <div className='react-doc-main'>
+        {this.renderDocMain()}
+      </div>
+    );
   }
+
 });
 
 export default ReactDocMain;
