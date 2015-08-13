@@ -9,7 +9,7 @@ const ReactDocSection = React.createClass({
 
   propTypes: {
     componentItem: PropTypes.object.isRequired,
-    reactDocGlobalRequire: PropTypes.func,
+    previewConfig: PropTypes.object,
     grouper: PropTypes.func
   },
 
@@ -94,7 +94,7 @@ const ReactDocSection = React.createClass({
       return (
         <ReactPlayground
           key={idx}
-          reactDocGlobalRequire={this.props.reactDocGlobalRequire}
+          previewConfig={this.props.previewConfig}
           codeText={exampleItem.contents}
           />)
     });

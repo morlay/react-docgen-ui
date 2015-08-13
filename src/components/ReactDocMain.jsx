@@ -42,7 +42,7 @@ const ReactDocMain = React.createClass({
               <ReactDocSection
                 key={idx}
                 componentItem={componentItem}
-                reactDocGlobalRequire={props.reactDocGlobalRequire}
+                previewConfig={props.previewConfig}
                 />
             )
           })

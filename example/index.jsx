@@ -1,19 +1,27 @@
 import React from 'react';
 
 import reactDocJson from './data/react-doc.json';
-import reactDocGlobalRequire from './data/react-doc';
 
 import ReactDocMain from '../src/components/ReactDocMain';
 import ReactDocMenu from '../src/components/ReactDocMenu';
 
 import { run, Route, DefaultRoute, RouteHandler, Navigation } from 'react-router';
 
+const siteUrlBase = window.location.origin + window.location.pathname;
+
+const previewConfig = {
+  styles: [],
+  scripts: [
+    `${siteUrlBase}assets/js/vendor.js`,
+    `${siteUrlBase}assets/js/components.js`
+  ]
+}
+
 const ReactDoc = React.createClass({
 
   mixins: [
     Navigation
   ],
-
 
   _onMenuItemClick(groupName, componentName){
 
@@ -38,8 +46,8 @@ const ReactDoc = React.createClass({
           onItemClick={this._onMenuItemClick}
           reactDocJson={reactDocJson}/>
         <RouteHandler
-          reactDocJson={reactDocJson}
-          reactDocGlobalRequire={reactDocGlobalRequire}/>
+          previewConfig={previewConfig}
+          reactDocJson={reactDocJson}/>
       </div>
     );
   }

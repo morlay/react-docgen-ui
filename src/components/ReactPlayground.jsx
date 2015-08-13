@@ -3,6 +3,7 @@ import classNames from 'classnames';
 import * as babel from 'babel';
 
 import CodeMirrorEditor from './CodeMirrorEditor';
+import ReactPreview from './ReactPreview';
 
 const PropTypes = React.PropTypes;
 
@@ -10,7 +11,7 @@ const ReactPlayground = React.createClass({
 
   propTypes: {
     codeText: PropTypes.string.isRequired,
-    reactDocGlobalRequire: PropTypes.func
+    previewConfig: PropTypes.object
   },
 
   getInitialState() {
@@ -43,34 +44,24 @@ const ReactPlayground = React.createClass({
     this.timeoutID = setTimeout.apply(null, arguments);
   },
 
-  executeCode: function () {
+  executeCode () {
 
     try {
 
-      const compiledCode = babel.transform(this.state.codeText, {
+      const compiledCodeText = babel.transform(this.state.codeText, {
         sourceMaps: 'inline'
       }).code;
 
-      let Component;
-
-      eval(`
-        const componentModule = {};
-        (function(require, module, exports){
-          ${compiledCode}
-        })(this.props.reactDocGlobalRequire, componentModule, {});
-        Component = componentModule.exports;
-      `);
-
-      this.setState({
-        component: <Component/>
-      });
+      if (compiledCodeText) {
+        this.setState({
+          compiledCodeText: compiledCodeText
+        })
+      }
 
     } catch (err) {
-
       this.setTimeout(()=> {
         console.error(err)
       }, 500);
-
     }
 
   },
@@ -97,7 +88,9 @@ const ReactPlayground = React.createClass({
         className='react-playground'>
         <div className='react-playground__example'>
           <div className='react-playground__example-inner'>
-            {this.renderPreview(this.state.component)}
+            <ReactPreview
+              previewConfig={this.props.previewConfig}
+              codeString={this.state.compiledCodeText}/>
           </div>
         </div>
         {this.state.showCode ? (
