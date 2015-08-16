@@ -1,8 +1,10 @@
-import React from 'react';
+import React from 'react'
 
-const PropTypes = React.PropTypes;
+import Resizable from './Resizable'
 
-class ReactPreview extends React.Component {
+const PropTypes = React.PropTypes
+
+export default class ReactPreview extends React.Component {
 
   static propTypes = {
     codeString: PropTypes.string,
@@ -13,6 +15,14 @@ class ReactPreview extends React.Component {
     previewConfig: {}
   }
 
+  constructor(props) {
+    super(props)
+    this.state = {
+      width: 320,
+      height: 500
+    }
+  }
+
   componentDidMount() {
     this.refreshIframe(this.props)
   }
@@ -21,10 +31,6 @@ class ReactPreview extends React.Component {
     if (nextProps.codeString !== this.props.codeString) {
       this.refreshIframe(nextProps)
     }
-  }
-
-  shouldComponentUpdate() {
-    return false
   }
 
   refreshIframe(props) {
@@ -54,20 +60,65 @@ class ReactPreview extends React.Component {
             ${props.codeString}
         })(components.require, componentModule, {});
         var Component = componentModule.exports;
-        console.log(Component)
-        React.render(React.createElement(Component, {}, null), document.getElementById('demo'))
+        React.render(React.createElement(Component, {}, null), document.body)
       `
 
     codeBlocks.push(`<script>${script}</script>`)
 
     iframeDoc.open();
-    iframeDoc.write(`<body><div id="demo">${codeBlocks.join('\n')}</div></body>`)
+    iframeDoc.write(`<body>${codeBlocks.join('\n')}</body>`)
 
+  }
+
+  onResize(evt, {size}) {
+    this.setState(size);
+  }
+
+  resizeWidth(evt) {
+    this.setState({
+      width: parseInt(evt.target.value)
+    });
+  }
+
+  resizeHeight(evt) {
+    this.setState({
+      height: parseInt(evt.target.value)
+    });
   }
 
   render() {
-    return <iframe ref='iframe'/>
+
+    const state = this.state
+
+    const styles = {
+      width: state.width + 'px', height: state.height + 'px'
+    }
+
+    return (<div className='react-preview'>
+      <div className='react-preview__size-input'>
+        <label>
+          <span> width:</span>
+          <input name='width'
+                 type='number'
+                 value={state.width}
+                 onChange={this.resizeWidth.bind(this)}/>
+        </label>
+        <label>
+          <span> height:</span>
+          <input name='height'
+                 type='number'
+                 value={state.height}
+                 onChange={this.resizeHeight.bind(this)}/>
+        </label>
+      </div>
+      <Resizable
+        width={state.width}
+        height={state.height}
+        className='react-preview__resize--container'
+        onResize={this.onResize.bind(this)}>
+        <iframe ref='iframe'
+                style={styles}/>
+      </Resizable>
+    </div>)
   }
 }
-
-export default ReactPreview;
