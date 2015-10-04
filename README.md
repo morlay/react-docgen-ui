@@ -17,8 +17,8 @@ use gulp to generate `react-doc.json` (react-doc infos with examples) and `react
       .pipe(gulpDocGenUi({
         cwd: gutil.env.cwd ? process.cwd() : null
       }))
-      .on("error", gutil.log.bind(gulp))
-      .pipe(gulp.dest('path/to/dist`))
+      .on('error', gutil.log.bind(gulp))
+      .pipe(gulp.dest(`path/to/dist`))
 
 ```
 
