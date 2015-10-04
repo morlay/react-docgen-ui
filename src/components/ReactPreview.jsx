@@ -43,10 +43,11 @@ export default class ReactPreview extends React.Component {
     const styles = props.previewConfig.styles || []
     const scripts = props.previewConfig.scripts || []
 
+    const headBlocks = [];
     const codeBlocks = [];
 
     styles.forEach((link)=> {
-      codeBlocks.push(`<link rel='stylesheet' href='${link}'/> `)
+      headBlocks.push(`<link rel='stylesheet' href='${link}'/> `)
     })
 
     scripts.forEach((link)=> {
@@ -60,13 +61,21 @@ export default class ReactPreview extends React.Component {
             ${props.codeString}
         })(components.require, componentModule, {});
         var Component = componentModule.exports;
-        React.render(React.createElement(Component, {}, null), document.body)
+        React.render(React.createElement(Component, {}, null), document.getElementById('root'))
       `
 
     codeBlocks.push(`<script>${script}</script>`)
 
     iframeDoc.open();
-    iframeDoc.write(`<body>${codeBlocks.join('\n')}</body>`)
+    iframeDoc.write(`
+      <html>
+        <head>${headBlocks.join('\n')}</head>
+        <body>
+          <div id='root'></div>
+          ${codeBlocks.join('\n')}
+        </body>
+      </html>`
+    )
 
   }
 
