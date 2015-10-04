@@ -1,8 +1,26 @@
-import React from "react";
-import Component from "../Component.jsx"
+import React from 'react';
+import Component from '../Component.jsx'
 
-const instance = (
-  <Component requiredFunc={function(){}} requiredAny={1}/>
-);
+class ComponentDemo extends React.Component {
 
-React.render(instance, mountNode);
+  constructor(props, context) {
+    super(props, context)
+  }
+
+  someFunc() {
+
+  }
+
+  render() {
+    return (
+      <Component
+        requiredFunc={this.someFunc}
+        requiredAny={1}/>
+    )
+  }
+}
+
+export default ComponentDemo;
+
+
+

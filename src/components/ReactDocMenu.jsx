@@ -7,7 +7,7 @@ const PropTypes = React.PropTypes;
 const ReactDocMenu = React.createClass({
 
   propTypes: {
-    reactDocJson: PropTypes.object.isRequired,
+    reactDocJson: PropTypes.object,
     /**
      * `groupName`, `componentName`
      */
@@ -45,7 +45,8 @@ const ReactDocMenu = React.createClass({
   renderMenuItem(componentList){
     return _.map(componentList, (componentItem, idx)=> {
       return (
-        <li className='react-doc-menu__group-list-item' key={idx}>
+        <li className='react-doc-menu__group-list-item'
+            key={idx}>
           <a href='#'
              onClick={this._onItemClick.bind(this, this.props.grouper(componentItem.module), componentItem.name)}>
             {componentItem.name}
@@ -59,7 +60,8 @@ const ReactDocMenu = React.createClass({
     return (
       <div className='react-doc-menu'>
         <h1 className='react-doc-menu__group-heading'>
-          <a href='#' onClick={this._onItemClick.bind(this, null, null)}>
+          <a href='#'
+             onClick={this._onItemClick.bind(this, null, null)}>
             All
           </a>
         </h1>
@@ -79,7 +81,8 @@ const ReactDocMenu = React.createClass({
               key={idx}
               className='react-doc-menu__group'>
               <h1 className='react-doc-menu__group-heading'>
-                <a href='#' onClick={this._onItemClick.bind(this, groupName, null)}>
+                <a href='#'
+                   onClick={this._onItemClick.bind(this, groupName, null)}>
                   {groupName}
                 </a>
               </h1>

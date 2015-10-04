@@ -1,7 +1,7 @@
 import gulp from 'gulp';
 import gutil from 'gulp-util';
 
-import gulpDocGenUi from '../src';
+import gulpDocGenUi from '../../src';
 
 const TASK_NAME = 'docs';
 

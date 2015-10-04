@@ -2,15 +2,15 @@ import gulp from 'gulp'
 import runSequence from 'run-sequence'
 import requireDir from 'require-dir'
 import _ from 'lodash'
-import gulpTaskConfig from './tasks/libs/gulp-task-config'
+import gulpTaskConfig from './libs/gulp-task-config'
 
 gulpTaskConfig(gulp)
 
 requireDir('./tasks')
 
-gulp.config('tasks', requireDir('./tasks/config'))
+gulp.config('tasks', requireDir('./config'))
 
-gulp.task('build', (callback)=> {
+gulp.task('build', (callback) => {
   runSequence(
     'clean',
     'copy',

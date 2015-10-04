@@ -9,7 +9,7 @@ const ReactDocSection = React.createClass({
 
   propTypes: {
     componentItem: PropTypes.object.isRequired,
-    reactDocGlobalRequire: PropTypes.func,
+    previewConfig: PropTypes.object,
     grouper: PropTypes.func
   },
 
@@ -24,7 +24,8 @@ const ReactDocSection = React.createClass({
       .map((propKey, idx)=> {
         const propItem = componentProps[propKey];
         return (
-          <div className='react-doc-section__prop' key={idx}>
+          <div className='react-doc-section__prop'
+               key={idx}>
             <h3 className='react-doc-section__prop-title'> Prop: {propKey}
               {propItem.required ? <span> *</span> : null}
             </h3>
@@ -55,7 +56,7 @@ const ReactDocSection = React.createClass({
                 {`Type: ${typeObject.name}`}
               </div>
               <table>
-                { _(typeObject.value)
+                {_(typeObject.value)
                   .keys()
                   .map((key, idx)=> {
                     return (
@@ -93,7 +94,7 @@ const ReactDocSection = React.createClass({
       return (
         <ReactPlayground
           key={idx}
-          reactDocGlobalRequire={this.props.reactDocGlobalRequire}
+          previewConfig={this.props.previewConfig}
           codeText={exampleItem.contents}
           />)
     });
@@ -106,7 +107,8 @@ const ReactDocSection = React.createClass({
     return (
       <section {...props}
         className='react-doc-section'>
-        <h2 className='react-doc-section__title'>{props.componentItem.name}
+        <h2 className='react-doc-section__title'>
+          {props.componentItem.name}
           <small className='react-doc-section__sub-title'>
             {props.grouper(props.componentItem.module)}
           </small>

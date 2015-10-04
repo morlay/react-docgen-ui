@@ -32,7 +32,8 @@ describe(__filename, function () {
 
     beforeEach(()=> {
       codeMirrorEditor = TestUtils.renderIntoDocument(
-        <CodeMirrorEditor codeText='let a;' isMobile/>
+        <CodeMirrorEditor codeText='let a;'
+                          isMobile/>
       );
     });
 

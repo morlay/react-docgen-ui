@@ -14,6 +14,14 @@ export default {
       external: vendors
     }
   }, {
+    entry: 'example/components.jsx',
+    dest: jsDestFolder,
+    options: {
+      debug: true,
+      basename: 'components',
+      external: vendors
+    }
+  }, {
     dest: jsDestFolder,
     options: {
       basename: 'vendor',

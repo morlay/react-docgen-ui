@@ -9,10 +9,9 @@ const PropTypes = React.PropTypes;
 const ReactDocMain = React.createClass({
 
   propTypes: {
-    reactDocGlobalRequire: PropTypes.func.isRequired,
-    reactDocJson: PropTypes.object.isRequired,
+    reactDocJson: PropTypes.object,
+    previewConfig: PropTypes.object,
     params: PropTypes.object.isRequired,
-    query: PropTypes.object.isRequired,
     grouper: PropTypes.func
   },
 
@@ -43,7 +42,7 @@ const ReactDocMain = React.createClass({
               <ReactDocSection
                 key={idx}
                 componentItem={componentItem}
-                reactDocGlobalRequire={props.reactDocGlobalRequire}
+                previewConfig={props.previewConfig}
                 />
             )
           })
