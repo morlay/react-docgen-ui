@@ -1,7 +1,7 @@
 tests/
 src/
 public/
-tasks/
+gulpfile.babel.js/
 
 __tests__/
 examples/
