@@ -1,6 +1,4 @@
 import React from 'react';
-import _ from 'lodash';
-import path from 'path';
 
 import reactDocJson from './data/react-doc.json';
 import reactDocGlobalRequire from './data/react-doc';

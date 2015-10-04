@@ -38,36 +38,32 @@ const ReactPlayground = React.createClass({
     clearTimeout(this.timeoutID);
   },
 
-  componentWillUnmount() {
-    try {
-      const mountNode = React.findDOMNode(this.refs.preview);
-      React.unmountComponentAtNode(mountNode);
-    } catch (e) {
-      console.log(e)
-    }
-  },
-
   setTimeout() {
     clearTimeout(this.timeoutID);
     this.timeoutID = setTimeout.apply(null, arguments);
   },
 
   executeCode: function () {
-    const mountNode = React.findDOMNode(this.refs.preview);
 
     try {
 
-      React.unmountComponentAtNode(mountNode);
+      const compiledCode = babel.transform(this.state.codeText, {
+        sourceMaps: 'inline'
+      }).code;
 
-      const compiledCode = babel.transform(this.state.codeText).code;
+      let Component;
 
-      let Inst;
+      eval(`
+        const componentModule = {};
+        (function(require, module, exports){
+          ${compiledCode}
+        })(this.props.reactDocGlobalRequire, componentModule, {});
+        Component = componentModule.exports;
+      `);
 
-      eval(
-        'Inst = function(require){\n' + compiledCode + '\n};'
-      );
-
-      Inst.call(null, this.props.reactDocGlobalRequire);
+      this.setState({
+        component: <Component/>
+      });
 
     } catch (err) {
 
@@ -91,13 +87,18 @@ const ReactPlayground = React.createClass({
     this.executeCode();
   },
 
+  renderPreview(component){
+    return component
+  },
+
   render() {
     return (
       <div {...this.props}
         className='react-playground'>
         <div className='react-playground__example'>
-          <div className='react-playground__example-inner'
-               ref='preview'/>
+          <div className='react-playground__example-inner'>
+            {this.renderPreview(this.state.component)}
+          </div>
         </div>
         {this.state.showCode ? (
           <CodeMirrorEditor

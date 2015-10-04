@@ -13,6 +13,7 @@ class Message {
  * @exampleFile ./examples/Component.jsx
  */
 export default React.createClass({
+
   propTypes: {
     optionalArray: PropTypes.array,
     optionalBool: PropTypes.bool,
@@ -42,11 +43,14 @@ export default React.createClass({
 
     customProp: function (props, propName, componentName) {
       if (!/matchme/.test(props[propName])) {
-        return new Error('Validation failed!');
+        return new Error('Validation failed!', componentName);
       }
     }
+
   },
+
   render(){
-    return <span> I am a Component </span>;
+    return <span> I am a Component {this.props.requiredAny} </span>;
   }
+
 });
