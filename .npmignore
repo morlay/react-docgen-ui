@@ -4,4 +4,6 @@ public/
 gulpfile.babel.js/
 
 __tests__/
-examples/
+
+coverage/
+.idea/
