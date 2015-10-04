@@ -46,15 +46,20 @@ describe(__filename, function () {
           'description': './Component.jsx'
         };
 
-        createComponentFile([
+        createComponentFile('./Component.jsx', [
           'let react = require(\'react\');',
-          'import Component from \'../__tests__/Component.jsx\';'
-        ].join('\n'))
+          'import Component from \'../__tests__/ComponentRequired.jsx\';'
+        ].join('\n'));
+
+        createComponentFile('./ComponentRequired.jsx', [
+          'let react = require(\'react\');'
+        ].join('\n'));
 
       });
 
       afterEach(()=> {
-        cleanComponentFile();
+        cleanComponentFile('./Component.jsx');
+        cleanComponentFile('./ComponentRequired.jsx');
       });
 
       it('and should get contents from this file path', function () {
@@ -77,21 +82,54 @@ describe(__filename, function () {
           ));
       });
 
+
     });
+
+    context('require self', ()=> {
+
+      beforeEach(()=> {
+        createComponentFile('./ComponentSelf.jsx', [
+          'let react = require(\'react\');',
+          'import Component from \'../__tests__/ComponentSelf.jsx\';'
+        ].join('\n'));
+      })
+
+      afterEach(()=> {
+        cleanComponentFile('./ComponentSelf.jsx');
+      })
+
+
+      it('and should throw error when require self in example contents through file', function () {
+
+        const tags = {
+          'title': 'exampleFile',
+          'description': './ComponentSelf.jsx'
+        };
+
+        expect(function () {
+          getExampleContents(tags, {
+            basedir: __dirname,
+            cwd: process.cwd()
+          }).contents
+        }).to.throw('should not require self')
+
+      });
+
+    })
 
   })
 
 });
 
 
-function createComponentFile(componentString) {
+function createComponentFile(filename, componentString) {
   componentString = componentString || `
     import React from \'react\'
     export default React.createClass({})
   `;
-  fs.writeFileSync(path.join(__dirname, '/Component.jsx'), componentString)
+  fs.writeFileSync(path.join(__dirname, filename), componentString)
 }
 
-function cleanComponentFile() {
-  fs.unlinkSync(path.join(__dirname, '/Component.jsx'));
+function cleanComponentFile(filename) {
+  fs.unlinkSync(path.join(__dirname, filename));
 }

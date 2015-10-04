@@ -16,8 +16,8 @@ function getExampleContents(tagItem = {}, options = {}) {
   if (tagItem.title === 'exampleFile') {
     exampleFile = path.resolve(basedir, _.trim(tagItem.description));
     options.basedir = path.dirname(exampleFile);
+    options.basename = path.basename(exampleFile);
     contents = String(fs.readFileSync(exampleFile, 'utf-8'));
-
   } else {
     contents = tagItem.description
   }
