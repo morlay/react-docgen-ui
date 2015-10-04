@@ -1,11 +1,17 @@
 import React from 'react';
 
+import createHistory from 'history/lib/createHashHistory'
+
 import reactDocJson from './data/react-doc.json';
 
 import ReactDocMain from '../src/components/ReactDocMain';
 import ReactDocMenu from '../src/components/ReactDocMenu';
 
-import { run, Route, DefaultRoute, RouteHandler, Navigation } from 'react-router';
+import {
+  Router,
+  Route,
+  IndexRoute
+} from 'react-router';
 
 const siteUrlBase = window.location.origin + window.location.pathname;
 
@@ -17,50 +23,54 @@ const previewConfig = {
   ]
 }
 
-const ReactDoc = React.createClass({
+class ReactDoc extends React.Component {
 
-  mixins: [
-    Navigation
-  ],
+  static propTypes = {
+    children: React.PropTypes.node
+  }
 
-  _onMenuItemClick(groupName, componentName){
+  static contextTypes = {
+    history: React.PropTypes.object
+  }
+
+  _onMenuItemClick(groupName, componentName) {
+
+    const history = this.context.history;
 
     if (componentName) {
-      this.transitionTo('react-doc-component', {
-        groupName: groupName,
-        componentName: componentName
-      })
+      history.pushState(null, `/${groupName}/${componentName}`)
     } else if (groupName) {
-      this.transitionTo('react-doc-group', {
-        groupName: groupName
-      })
+      history.pushState(null, `/${groupName}`)
     } else {
-      this.transitionTo('react-doc')
+      history.pushState(null, `/`)
     }
-  },
+  }
 
   render() {
     return (
       <div className='react-doc'>
-        <ReactDocMenu
-          onItemClick={this._onMenuItemClick}
-          reactDocJson={reactDocJson}/>
-        <RouteHandler
-          previewConfig={previewConfig}
-          reactDocJson={reactDocJson}/>
+        <ReactDocMenu onItemClick={this._onMenuItemClick.bind(this)}
+                      reactDocJson={reactDocJson}/>
+        {React.cloneElement(this.props.children, {
+          previewConfig: previewConfig,
+          reactDocJson: reactDocJson
+        })}
       </div>
     );
   }
-});
 
-const rootRoutes = (
-  <Route name='react-doc' path='/' handler={ ReactDoc }>
-    <DefaultRoute handler={ ReactDocMain }/>
-    <Route name='react-doc-group' path='/:groupName' handler={ ReactDocMain }/>
-    <Route name='react-doc-component' path='/:groupName/:componentName' handler={ ReactDocMain }/>
-  </Route>
+}
+
+React.render(
+  (<Router history={createHistory()}>
+    <Route path='/'
+           component={ReactDoc}>
+      <IndexRoute component={ReactDocMain}/>
+      <Route path='/:groupName'
+             component={ReactDocMain}/>
+      <Route path='/:groupName/:componentName'
+             component={ReactDocMain}/>
+    </Route>
+  </Router>),
+  global.document.getElementById('root')
 );
-
-run(rootRoutes, function (Handler) {
-  React.render(<Handler />, global.document.body);
-});
