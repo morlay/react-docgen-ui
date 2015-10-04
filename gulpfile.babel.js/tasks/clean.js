@@ -5,7 +5,8 @@ const TASK_NAME = 'clean';
 
 function clean(callBack) {
   gulp.autoRegister(TASK_NAME, (config)=> {
-    del(config.src, callBack)
+    del.sync(config.src)
+    callBack();
   });
 }
 
