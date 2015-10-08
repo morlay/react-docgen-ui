@@ -2,7 +2,9 @@ import _ from 'lodash';
 
 function getDocDependenceListByResult(result) {
 
-  let requireList = {};
+  let requireList = {
+    'react-dom': true
+  };
 
   findExample(result);
 

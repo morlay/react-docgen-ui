@@ -1,4 +1,5 @@
 import React from 'react';
+import ReactDOM from 'react-dom';
 
 import createHistory from 'history/lib/createHashHistory'
 
@@ -58,10 +59,9 @@ class ReactDoc extends React.Component {
       </div>
     );
   }
-
 }
 
-React.render(
+ReactDOM.render(
   (<Router history={createHistory()}>
     <Route path='/'
            component={ReactDoc}>

@@ -1,4 +1,5 @@
 import React, { PropTypes } from 'react';
+import ReactDOM from 'react-dom';
 import { Resizable as OldResizable } from 'react-resizable';
 
 export default class Resizable extends React.Component {
@@ -38,11 +39,11 @@ export default class Resizable extends React.Component {
   }
 
   onResizeStop() {
-    React.findDOMNode(this.refs.mask).classList.remove('show')
+    ReactDOM.findDOMNode(this.refs.mask).classList.remove('show')
   }
 
   onResizeStart() {
-    React.findDOMNode(this.refs.mask).classList.add('show')
+    ReactDOM.findDOMNode(this.refs.mask).classList.add('show')
   }
 
   render() {

@@ -7,23 +7,24 @@ import ReactPreview from './ReactPreview';
 
 const PropTypes = React.PropTypes;
 
-const ReactPlayground = React.createClass({
+class ReactPlayground extends React.Component {
 
-  propTypes: {
+  static propTypes = {
     codeText: PropTypes.string.isRequired,
     previewConfig: PropTypes.object
-  },
+  };
 
-  getInitialState() {
-    return {
-      codeText: this.props.codeText,
+  constructor(props) {
+    super(props)
+    this.state = {
+      codeText: props.codeText,
       showCode: false
     };
-  },
+  }
 
   componentDidMount() {
     this.executeCode();
-  },
+  }
 
   componentWillReceiveProps(nextProps) {
     if (this.state.codeText !== nextProps.codeText) {
@@ -33,18 +34,18 @@ const ReactPlayground = React.createClass({
         this.executeCode();
       });
     }
-  },
+  }
 
   componentDidUpdate() {
     clearTimeout(this.timeoutID);
-  },
+  }
 
   setTimeout() {
     clearTimeout(this.timeoutID);
     this.timeoutID = setTimeout.apply(null, arguments);
-  },
+  }
 
-  executeCode () {
+  executeCode() {
 
     try {
 
@@ -64,23 +65,23 @@ const ReactPlayground = React.createClass({
       }, 500);
     }
 
-  },
+  }
 
-  _onCodeToggle(evt){
+  _onCodeToggle(evt) {
     evt.preventDefault();
     this.setState({
       showCode: !this.state.showCode
     })
-  },
+  }
 
   handleCodeChange(value) {
     this.setState({codeText: value});
     this.executeCode();
-  },
+  }
 
-  renderPreview(component){
+  renderPreview(component) {
     return component
-  },
+  }
 
   render() {
     return (
@@ -110,6 +111,7 @@ const ReactPlayground = React.createClass({
       </div>
     );
   }
-});
+}
+
 
 export default ReactPlayground;

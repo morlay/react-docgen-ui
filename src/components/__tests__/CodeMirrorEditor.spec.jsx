@@ -1,9 +1,8 @@
-import React from 'react/addons';
+import React from 'react';
+import TestUtils from 'react/lib/ReactTestUtils'
 import { expect } from 'chai';
 
 import CodeMirrorEditor from '../CodeMirrorEditor';
-
-const TestUtils = React.addons.TestUtils;
 
 describe(__filename, function () {
 

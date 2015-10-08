@@ -1,4 +1,5 @@
 import React from 'react';
+import ReactDOM from 'react-dom';
 import CodeMirror from 'codemirror';
 
 const PropTypes = React.PropTypes;
@@ -42,7 +43,7 @@ const CodeMirrorEditor = React.createClass({
 
   _initialEditor(){
 
-    this._editor = CodeMirror.fromTextArea(React.findDOMNode(this.refs.editor), {
+    this._editor = CodeMirror.fromTextArea(ReactDOM.findDOMNode(this.refs.editor), {
       mode: 'javascript',
       lineNumbers: true,
       lineWrapping: true,

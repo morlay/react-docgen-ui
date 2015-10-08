@@ -1,4 +1,5 @@
 import React from 'react'
+import ReactDOM from 'react-dom'
 
 import Resizable from './Resizable'
 
@@ -35,7 +36,7 @@ export default class ReactPreview extends React.Component {
 
   refreshIframe(props) {
 
-    const iframe = React.findDOMNode(this.refs.iframe);
+    const iframe = ReactDOM.findDOMNode(this.refs.iframe);
 
     if (iframe) {
 
@@ -59,12 +60,13 @@ export default class ReactPreview extends React.Component {
 
       let script = `
         var React = require('react');
+        var ReactDOM = require('react-dom');
         var componentModule = {};
         (function(require, module, exports){
             ${props.codeString}
         })(components.require, componentModule, {});
         var Component = componentModule.exports;
-        React.render(React.createElement(Component, {}, null), document.getElementById('root'))
+        ReactDOM.render(React.createElement(Component, {}, null), document.getElementById('root'))
       `
 
       codeBlocks.push(`<script>${script}</script>`)

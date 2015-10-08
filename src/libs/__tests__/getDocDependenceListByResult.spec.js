@@ -42,6 +42,7 @@ describe(__filename, function () {
       };
 
       expect(getDocDependenceListByResult(result)).to.be.deep.equal([
+        'react-dom',
         'react',
         'components/Component',
         'components/Component2'
