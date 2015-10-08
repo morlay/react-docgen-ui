@@ -1,0 +1,9 @@
+verbose: false
+instrumentation:
+    extensions:
+        - .js
+        - .jsx
+    excludes:
+        - "**/__tests__/**"
+        - "dist/**"
+        - "tests/**"
