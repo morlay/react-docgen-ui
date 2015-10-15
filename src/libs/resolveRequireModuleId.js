@@ -15,7 +15,7 @@ function resolveRequireModuleId(originRequireString, options = {}) {
 
   if (_.startsWith(pathName, './') || _.startsWith(pathName, '../')) {
     resolvedPathName = path.resolve(basedir, pathName);
-    if (!fs.existsSync(resolvedPathName)) {
+    if (!existsFileWithExtensions(resolvedPathName)) {
       throw new Error(`${resolvedPathName} is not exists, please check file in ${filePath}`)
     }
     if (filePath === resolvedPathName) {
@@ -33,6 +33,12 @@ function resolveRequireModuleId(originRequireString, options = {}) {
   }
 
   return resolvedPathName;
+}
+
+function existsFileWithExtensions(resolvedPathName) {
+  return [null].concat(EXTENSIONS).reduce((result, ext) => {
+    return result || fs.existsSync(resolvedPathName + (ext || ''))
+  }, false)
 }
 
 export default resolveRequireModuleId;
