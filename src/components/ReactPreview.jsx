@@ -1,4 +1,5 @@
 import React from 'react'
+import ReactDOM from 'react-dom'
 
 import Resizable from './Resizable'
 
@@ -35,39 +36,43 @@ export default class ReactPreview extends React.Component {
 
   refreshIframe(props) {
 
-    const iframe = React.findDOMNode(this.refs.iframe);
-    const iframeDoc = iframe.contentDocument || iframe.contentWindow.document
+    const iframe = ReactDOM.findDOMNode(this.refs.iframe);
 
-    iframeDoc.close();
+    if (iframe) {
 
-    const styles = props.previewConfig.styles || []
-    const scripts = props.previewConfig.scripts || []
+      const iframeDoc = iframe.contentDocument || iframe.contentWindow.document
 
-    const headBlocks = [];
-    const codeBlocks = [];
+      iframeDoc.close();
 
-    styles.forEach((link)=> {
-      headBlocks.push(`<link rel='stylesheet' href='${link}'/> `)
-    })
+      const styles = props.previewConfig.styles || []
+      const scripts = props.previewConfig.scripts || []
 
-    scripts.forEach((link)=> {
-      codeBlocks.push(`<script src='${link}'></script>`)
-    })
+      const headBlocks = [];
+      const codeBlocks = [];
 
-    let script = `
+      styles.forEach((link)=> {
+        headBlocks.push(`<link rel='stylesheet' href='${link}'/> `)
+      })
+
+      scripts.forEach((link)=> {
+        codeBlocks.push(`<script src='${link}'></script>`)
+      })
+
+      let script = `
         var React = require('react');
+        var ReactDOM = require('react-dom');
         var componentModule = {};
         (function(require, module, exports){
             ${props.codeString}
         })(components.require, componentModule, {});
         var Component = componentModule.exports;
-        React.render(React.createElement(Component, {}, null), document.getElementById('root'))
+        ReactDOM.render(React.createElement(Component, {}, null), document.getElementById('root'))
       `
 
-    codeBlocks.push(`<script>${script}</script>`)
+      codeBlocks.push(`<script>${script}</script>`)
 
-    iframeDoc.open();
-    iframeDoc.write(`
+      iframeDoc.open();
+      iframeDoc.write(`
       <html>
         <head>${headBlocks.join('\n')}</head>
         <body>
@@ -75,7 +80,9 @@ export default class ReactPreview extends React.Component {
           ${codeBlocks.join('\n')}
         </body>
       </html>`
-    )
+      )
+
+    }
 
   }
 

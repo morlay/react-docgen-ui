@@ -56,16 +56,18 @@ const ReactDocSection = React.createClass({
                 {`Type: ${typeObject.name}`}
               </div>
               <table>
-                {_(typeObject.value)
-                  .keys()
-                  .map((key, idx)=> {
-                    return (
-                      <tr key={idx}>
-                        <td>{key}</td>
-                        <td>{this.processType(typeObject.value[key])}</td>
-                      </tr>)
-                  })
-                  .value()}
+                <tbody>
+                  {_(typeObject.value)
+                    .keys()
+                    .map((key, idx)=> {
+                      return (
+                        <tr key={idx}>
+                          <td>{key}</td>
+                          <td>{this.processType(typeObject.value[key])}</td>
+                        </tr>)
+                    })
+                    .value()}
+                </tbody>
               </table>
             </div>
           );

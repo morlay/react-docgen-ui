@@ -1,7 +1,10 @@
 const vendors = [
   'react',
+  'react/lib/ReactComponentWithPureRenderMixin',
+  'react-dom',
   'babel'
 ];
+
 const jsDestFolder = 'public/assets/js'
 
 export default {
