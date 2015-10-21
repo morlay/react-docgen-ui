@@ -97,11 +97,11 @@ class ReactPlayground extends React.Component {
         {this.state.showCode ? (
           <CodeMirrorEditor
             key='jsx'
-            onChange={this.handleCodeChange}
+            onChange={(e)=>this.handleCodeChange(e)}
             codeText={this.state.codeText}/>
         ) : null}
         <a href='#'
-           onClick={this._onCodeToggle}
+           onClick={(e)=>this._onCodeToggle(e)}
            className={classNames('react-playground__code-toggle', {
             'react-playground__code-toggle--open': this.state.showCode
           })}
