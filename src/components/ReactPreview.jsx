@@ -61,11 +61,14 @@ export default class ReactPreview extends React.Component {
       let script = `
         var React = require('react');
         var ReactDOM = require('react-dom');
-        var componentModule = {};
+        var componentExports = {};
+        function defaultRequire(path){
+          return components.require(path).default || components.require(path)
+        }
         (function(require, module, exports){
             ${props.codeString}
-        })(components.require, componentModule, {});
-        var Component = componentModule.exports;
+        })(defaultRequire, {}, componentExports);
+        var Component = componentExports.default;
         ReactDOM.render(React.createElement(Component, {}, null), document.getElementById('root'))
       `
 

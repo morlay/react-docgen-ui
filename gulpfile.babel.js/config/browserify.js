@@ -1,15 +1,17 @@
+import babelify from 'babelify';
+import envify from 'envify';
+
 const vendors = [
   'react',
   'react/lib/ReactComponentWithPureRenderMixin',
-  'react-dom',
-  'babel'
+  'react-dom'
 ];
 
-const jsDestFolder = 'public/assets/js'
+const jsDestFolder = 'public/assets/js';
 
 export default {
   files: [{
-    entry: 'example/index.jsx',
+    entry: './example/index.jsx',
     dest: jsDestFolder,
     options: {
       debug: true,
@@ -17,7 +19,7 @@ export default {
       external: vendors
     }
   }, {
-    entry: 'example/components.jsx',
+    entry: './example/components.jsx',
     dest: jsDestFolder,
     options: {
       debug: true,
@@ -32,6 +34,10 @@ export default {
     }
   }],
   options: {
-    extensions: ['.jsx']
+    extensions: ['.jsx', '.js'],
+    transform: [
+      babelify,
+      envify
+    ]
   }
 }

@@ -23,3 +23,8 @@ use gulp to generate `react-doc.json` (react-doc infos with examples) and `react
 ```
 
 then see the example to config and create the doc pages.
+
+
+## Change logs
+
+* 0.4.x updated to babel6, if use commonjs, notice the `default` issue

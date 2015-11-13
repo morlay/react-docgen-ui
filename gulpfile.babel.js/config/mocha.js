@@ -7,7 +7,7 @@ export default {
   options: {
     r: 'tests/helpers/jsdom.js',
     R: 'dot',
-    compilers: '.:babel/register',
+    compilers: '.:babel-core/register',
     istanbul: gutil.env.cover
   }
 }

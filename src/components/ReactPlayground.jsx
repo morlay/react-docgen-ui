@@ -1,6 +1,10 @@
 import React from 'react';
 import classNames from 'classnames';
-import * as babel from 'babel';
+import * as babel from 'babel-core';
+
+import babelPresetEs2015 from 'babel-preset-es2015';
+import babelPresetStage0 from 'babel-preset-stage-0';
+import babelPresetReact from 'babel-preset-react';
 
 import CodeMirrorEditor from './CodeMirrorEditor';
 import ReactPreview from './ReactPreview';
@@ -50,7 +54,12 @@ class ReactPlayground extends React.Component {
     try {
 
       const compiledCodeText = babel.transform(this.state.codeText, {
-        sourceMaps: 'inline'
+        sourceMaps: 'inline',
+        presets: [
+          babelPresetEs2015,
+          babelPresetStage0,
+          babelPresetReact
+        ]
       }).code;
 
       if (compiledCodeText) {

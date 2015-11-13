@@ -51,6 +51,7 @@ export function autoRegister(TASK_NAME, bundleFn, devModelFn) {
   let conf = gulp.config(['tasks', TASK_NAME])
 
   conf = conf.index || conf;
+  conf = conf.default || conf;
 
   if (_.isFunction(conf)) {
     conf = conf();
