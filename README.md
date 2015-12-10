@@ -24,6 +24,11 @@ use gulp to generate `react-doc.json` (react-doc infos with examples) and `react
 
 then see the example to config and create the doc pages.
 
+## Options
+
+### noMarkedDescription
+
+Pass `noMarkedDescription: true` to prevent running the `marked` compiler on `description` keys in the exported object. This is useful if you want to process the docs further yourself, for example building full markdown documentation pages.
 
 ## Change logs
 

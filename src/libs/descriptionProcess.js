@@ -11,7 +11,7 @@ function descriptionProcess(targetObj = {}, options = {}) {
   if (descObj) {
 
     descObj = {
-      description: marked(descObj.description),
+      description: options.noMarkedDescription ? descObj.description : marked(descObj.description),
       examples: pickExampleFromTags(descObj.tags, options)
     };
 
