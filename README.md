@@ -26,9 +26,10 @@ then see the example to config and create the doc pages.
 
 ## Options
 
-### noMarkedDescription
+### descriptionCompiler
 
-Pass `noMarkedDescription: true` to prevent running the `marked` compiler on `description` keys in the exported object. This is useful if you want to process the docs further yourself, for example building full markdown documentation pages.
+Pass `descriptionCompiler: str => str` to change the default compiler `marked` on `description` keys in the exported object.
+This is useful if you want to process the docs further yourself, for example building full markdown documentation pages.
 
 ## Change logs
 

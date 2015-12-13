@@ -6,7 +6,6 @@ function descriptionExtract(descriptionString) {
     return null;
   }
   return doctrine.parse(descriptionString, {
-    unwrap: true,
     sloppy: true,
     tags: [
       'example',

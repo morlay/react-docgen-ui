@@ -4,14 +4,20 @@ import marked from 'marked';
 import descriptionExtract from './descriptionExtract';
 import getExampleContents from './getExampleContents';
 
+function defaultDescriptionCompiler(string){
+  return marked(string)
+}
+
 function descriptionProcess(targetObj = {}, options = {}) {
 
   let descObj = descriptionExtract(targetObj.description);
 
   if (descObj) {
 
+    const descriptionCompiler = _.isFunction(options.descriptionCompiler) ? options.descriptionCompiler: defaultDescriptionCompiler
+
     descObj = {
-      description: options.noMarkedDescription ? descObj.description : marked(descObj.description),
+      description: descriptionCompiler(descObj.description),
       examples: pickExampleFromTags(descObj.tags, options)
     };
 

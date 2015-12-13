@@ -26,10 +26,9 @@ function gulpPlugin(options = {}) {
 
       if (!_.isEmpty(moduleInfo)) {
         result[getModulePathByVinylFile(file)] = _.merge(
-          descriptionProcess(moduleInfo, {
-            basedir: path.dirname(file.path),
-            cwd: options.cwd
-          }),
+          descriptionProcess(moduleInfo, _.merge({}, options, {
+            basedir: path.dirname(file.path)
+          })),
           getModuleInfoByVinylFile(file)
         );
       }

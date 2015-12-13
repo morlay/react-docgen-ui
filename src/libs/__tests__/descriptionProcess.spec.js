@@ -68,7 +68,7 @@ describe(__filename, function () {
 
     });
 
-    it('should not process description in props if noMarkedDescription is set', function () {
+    it('should not process description in props if descriptionCompiler is set', function () {
 
       let targetObj = {
         'description': [
@@ -87,7 +87,7 @@ describe(__filename, function () {
 
       expect(descriptionProcess(targetObj, {
         basedir: __dirname,
-        noMarkedDescription: true
+        descriptionCompiler: (str) => str
       }))
         .to.to.deep.equal({
           description: '# description.',
