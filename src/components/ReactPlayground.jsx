@@ -1,6 +1,6 @@
 import React from 'react';
 import classNames from 'classnames';
-import * as babel from 'babel-core';
+import * as babel from 'babel-core/lib/api/browser';
 
 import babelPresetEs2015 from 'babel-preset-es2015';
 import babelPresetStage0 from 'babel-preset-stage-0';
