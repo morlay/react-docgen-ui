@@ -17,6 +17,7 @@ import {
 const siteUrlBase = window.location.origin + window.location.pathname;
 
 const previewConfig = {
+  components: 'components',
   styles: [],
   scripts: [
     `${siteUrlBase}assets/js/vendor.js`,

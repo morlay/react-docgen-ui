@@ -59,17 +59,18 @@ export default class ReactPreview extends React.Component {
       })
 
       let script = `
-        var React = require('react');
-        var ReactDOM = require('react-dom');
-        var componentExports = {};
-        function defaultRequire(path){
-          return components.require(path).default || components.require(path)
-        }
-        (function(require, module, exports){
+        (function() {
+          var __components__ = ${props.previewConfig.components || 'components'};
+          function defaultRequire(path) {
+            return __components__[path].default || __components__[path];
+          }
+          (function(require, module, exports) {
+            var React = require('react');
+            var ReactDOM = require('react-dom');
             ${props.codeString}
-        })(defaultRequire, {}, componentExports);
-        var Component = componentExports.default;
-        ReactDOM.render(React.createElement(Component, {}, null), document.getElementById('root'))
+            ReactDOM.render(React.createElement(exports.default || module.exports, {}, null), document.getElementById('root'))
+          })(defaultRequire, {}, {});
+        })();
       `
 
       codeBlocks.push(`<script>${script}</script>`)

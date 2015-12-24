@@ -1,2 +1,1 @@
-global.components = global.components || {}
-global.components.require = require('./data/react-doc')
+global.components = require('./data/react-doc');

@@ -14,9 +14,8 @@ describe(__filename, function () {
       ];
 
       expect(generateDocDependenceListByRequireList(dependenceList)).to.be.equal([
-        'require(\'react\');',
-        'require(\'components/Components\');',
-        'module.exports = require;'
+        'exports[\'react\'] = require(\'react\');',
+        'exports[\'components/Components\'] = require(\'components/Components\');'
       ].join('\n'));
     });
 
