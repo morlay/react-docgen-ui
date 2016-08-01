@@ -100,4 +100,20 @@ describe(__filename, function () {
 
   });
 
+  context('error', ()=> {
+    beforeEach(()=> {
+      createComponentFile(`
+      export default {TYPE_A: 'A', TYPE_B: 'B'}
+      `);
+    });
+
+    it('when source file is not a component, should throw error with file path', done => {
+      gulpStartWithReactDocGenUI()
+        .on('error', (error) => {
+          expect(error.name).to.be.equal(`Error on handle file ${path.join(__dirname, '/Component.jsx')}`);
+          done();
+        })
+    });
+  });
+
 });

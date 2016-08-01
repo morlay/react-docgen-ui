@@ -34,6 +34,7 @@ function gulpPlugin(options = {}) {
       }
 
     } catch (err) {
+      err.name = `Error on handle file ${file.path}`;
       this.emit('error', new gUtil.PluginError(PLUGIN_NAME, err));
     }
 
